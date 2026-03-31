@@ -14,7 +14,11 @@
         :productPrice="product.price"
       />
     </div>
-    <AddModal v-if="showAddModal" @close="showAddModal = false" />
+    <AddModal
+      v-if="showAddModal"
+      @close="showAddModal = false"
+      @add-product="fetchProducts"
+    />
   </div>
 </template>
 

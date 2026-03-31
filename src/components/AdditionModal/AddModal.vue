@@ -37,7 +37,12 @@ import { faXmark, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { useCurrencyInput } from "vue-currency-input";
 import axios from "axios";
 
-const emit = defineEmits(["close", "update:modelValue", "change"]);
+const emit = defineEmits([
+  "close",
+  "addProduct",
+  "update:modelValue",
+  "change",
+]);
 const isLoading = ref(false);
 const name = ref("");
 const description = ref("");
@@ -65,6 +70,7 @@ const handleSubmit = async () => {
     isLoading.value = true;
 
     await axios.post("http://localhost:3000/products", newProduct);
+    emit("addProduct");
 
     name.value = "";
     description.value = "";
