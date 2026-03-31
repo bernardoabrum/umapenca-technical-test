@@ -1,40 +1,47 @@
 {
   "products": [
     {
-      "id": 1,
-      "title": "Camiseta 1",
-      "description": "Descrição da camiseta 1",
-      "price": 29.99
+      "title": "Produto 1",
+      "description": "Descrição do produto 1",
+      "price": 19.99,
+      "id": "KlfGkjTu394"
     },
     {
-      "id": 2,
-      "title": "Camiseta 2",
-      "description": "Descrição da camiseta 2",
-      "price": 39.99
+      "title": "Produto 2",
+      "description": "Descrição do produto 2",
+      "price": 29.99,
+      "id": "2HQbQoUI_MI"
     },
     {
-      "id": 3,
-      "title": "Camiseta 3",
-      "description": "Descrição da camiseta 3",
-      "price": 49.99
+      "title": "Produto 3",
+      "description": "Descrição do produto 3",
+      "price": 25.99,
+      "id": "pGmeLVx2dqE"
     },
     {
-      "id": 4,
-      "title": "Camiseta 4",
-      "description": "Descrição da camiseta 4",
-      "price": 59.99
+      "title": "Produto 4",
+      "description": "Descrição do produto 4",
+      "price": 32.99,
+      "id": "0pNolW--Gg4"
     },
     {
-      "id": 5,
-      "title": "Camiseta 5",
-      "description": "Descrição da camiseta 5",
-      "price": 69.99
+      "title": "Produto 5",
+      "description": "Descrição do produto 5",
+      "price": 39.99,
+      "id": "OxEhRkzLBj8"
     },
     {
-      "id": 6,
-      "title": "Camiseta 6",
-      "description": "Descrição da camiseta 6",
-      "price": 79.99
+      "title": "Produto 6",
+      "description": "Descrição do produto 6",
+      "price": 45.99,
+      "id": "upLHoZrkpVw"
+    },
+    {
+      "title": "Produto 7",
+      "description": "Descrição do produto 7",
+      "price": 18.99,
+      "id": "HQv-yO9MSMc"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

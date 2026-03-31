@@ -1,6 +1,9 @@
 <template>
   <div class="view shop-view">
-    <h1 class="title">Camisetas</h1>
+    <h1 class="view-title">Camisetas</h1>
+    <button class="add-product" @click="showAddModal = true">
+      Adicionar produtos
+    </button>
     <div class="products-container">
       <Product
         v-for="product in products"
@@ -11,17 +14,19 @@
         :productPrice="product.price"
       />
     </div>
+    <AddModal v-if="showAddModal" @close="showAddModal = false" />
   </div>
 </template>
 
 <script setup>
 import "./ShopView.less";
 import { onMounted, ref } from "vue";
-import { Product } from "@/components";
+import { Product, AddModal } from "@/components";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 
 const products = ref([]);
+const showAddModal = ref(false);
 
 onMounted(() => {
   fetchProducts();

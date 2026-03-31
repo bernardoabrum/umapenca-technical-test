@@ -10,7 +10,7 @@
           {{ props.productDescription }}
         </h2>
       </div>
-      <p class="price">R${{ props.productPrice }}</p>
+      <p class="price">{{ formatPrice(props.productPrice) }}</p>
     </div>
   </div>
 </template>
@@ -36,4 +36,11 @@ const props = defineProps({
     required: true,
   },
 });
+
+const formatPrice = (value) => {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};
 </script>
