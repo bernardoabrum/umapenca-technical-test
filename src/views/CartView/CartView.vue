@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-view">
+  <div class="view cart-view">
     <h1>Cart</h1>
   </div>
 </template>

@@ -1,12 +1,12 @@
 <template>
-  <div class="shop-view">
-    <h1>Camisetas</h1>
+  <div class="view shop-view">
+    <h1 class="title">Camisetas</h1>
     <div class="products-container">
       <Product
         v-for="product in products"
         :key="product.id"
-        :imageSrc="product.img"
-        :productName="product.name"
+        :imageSrc="product.image"
+        :productName="product.title"
         :productDescription="product.description"
         :productPrice="product.price"
       />
@@ -16,51 +16,27 @@
 
 <script setup>
 import "./ShopView.less";
+import { onMounted, ref } from "vue";
 import { Product } from "@/components";
+import axios from "axios";
 import { faker } from "@faker-js/faker";
 
-const products = [
-  {
-    id: 1,
-    name: "Camiseta 1",
-    img: faker.image.url(),
-    description: "Camiseta de algodón 100% con un diseño moderno y cómodo.",
-    price: 19.99,
-  },
-  {
-    id: 2,
-    name: "Camiseta 2",
-    img: faker.image.url(),
-    description: "Camiseta de algodón 100% con un diseño moderno y cómodo.",
-    price: 19.99,
-  },
-  {
-    id: 3,
-    name: "Camiseta 3",
-    img: faker.image.url(),
-    description: "Camiseta de algodón 100% con un diseño moderno y cómodo.",
-    price: 19.99,
-  },
-  {
-    id: 4,
-    name: "Camiseta 4",
-    img: faker.image.url(),
-    description: "Camiseta de algodón 100% con un diseño moderno y cómodo.",
-    price: 19.99,
-  },
-  {
-    id: 5,
-    name: "Camiseta 5",
-    img: faker.image.url(),
-    description: "Camiseta de algodón 100% con un diseño moderno y cómodo.",
-    price: 19.99,
-  },
-  {
-    id: 6,
-    name: "Camiseta 6",
-    img: faker.image.url(),
-    description: "Camiseta de algodón 100% con un diseño moderno y cómodo.",
-    price: 19.99,
-  },
-];
+const products = ref([]);
+
+onMounted(() => {
+  fetchProducts();
+});
+
+const fetchProducts = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/products");
+
+    products.value = response.data.map((product) => ({
+      ...product,
+      image: faker.image.url(),
+    }));
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+};
 </script>
