@@ -1,4 +1,4 @@
-import ProductsView from "./ProductsView/ProductsView.vue";
+import ShopView from "./ShopView/ShopView.vue";
 import CartView from "./CartView/CartView.vue";
 
-export { ProductsView, CartView };
+export { ShopView, CartView };

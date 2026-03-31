@@ -1,0 +1,49 @@
+.cmp-product {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+  padding: 20px;
+  height: 560px;
+  background-color: rgb(240, 240, 240);
+
+  .container-image {
+    img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 15px;
+    }
+  }
+
+  .container-text {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+
+    .infos {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title {
+        font-size: 26px;
+        color: #242424;
+      }
+
+      .description {
+        font-size: 20px;
+        color: #242424;
+        font-weight: normal;
+      }
+    }
+
+    .price {
+      font-size: 22px;
+      color: #242424;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { ProductsView, CartView } from "@/views";
+import { ShopView, CartView } from "@/views";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      redirect: "/products",
+      redirect: "/shop",
     },
     {
-      path: "/products",
-      name: "products",
-      component: ProductsView,
+      path: "/shop",
+      name: "shop",
+      component: ShopView,
     },
     {
       path: "/cart",
