@@ -41,6 +41,18 @@
       "description": "Descrição do produto 7",
       "price": 18.99,
       "id": "HQv-yO9MSMc"
+    },
+    {
+      "title": "Produto 8",
+      "description": "Descrição do produto 8",
+      "price": 39.99,
+      "id": "YcTrZuCmjxY"
+    },
+    {
+      "title": "Produto 9",
+      "description": "Descrição do produto 9 ",
+      "price": 50.99,
+      "id": "WZMplgIIKsY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

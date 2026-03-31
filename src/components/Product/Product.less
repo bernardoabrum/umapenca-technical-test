@@ -1,3 +1,5 @@
+@import "@/styles/variables.less";
+
 .cmp-product {
   display: flex;
   flex-direction: column;
@@ -5,9 +7,9 @@
   width: 260px;
   padding: 20px;
   height: 510px;
-
-  //temp
-  background-color: rgb(240, 240, 240);
+  border: solid 1px #e0e0e0;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   .container-image {
     width: auto;
@@ -47,6 +49,7 @@
     .price {
       font-size: 22px;
       font-weight: bold;
+      color: @yellow-text;
     }
   }
 }

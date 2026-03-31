@@ -1,3 +1,5 @@
+@import "@/styles/variables.less";
+
 .shop-view {
   display: flex;
   flex-direction: column;
@@ -11,17 +13,17 @@
   .add-product {
     align-self: flex-end;
     margin: 20px 0;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #333;
+    padding: 20px 30px;
+    font-size: 20px;
+    background-color: @button-color;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 40px;
     cursor: pointer;
     transition: ease 0.3s;
 
     &:hover {
-      background-color: #555;
+      background-color: @button-hover;
     }
   }
 
@@ -30,5 +32,6 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
+    max-width: 1400px;
   }
 }
