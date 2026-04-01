@@ -1,5 +1,6 @@
 <template>
   <div class="view shop-view">
+    <Sidebar @filter="handleFilter" />
     <Select
       select-name="category"
       :select-options="categoryOptions"
@@ -12,7 +13,7 @@
     />
     <div class="products-container">
       <Product
-        v-for="product in products"
+        v-for="product in filteredProducts"
         :key="product.id"
         :imageSrc="product.image"
         :productName="product.title"
@@ -31,7 +32,7 @@
 <script setup>
 import "./ShopView.less";
 import { ref, computed, watchEffect } from "vue";
-import { Product, AddModal, Button, Select } from "@/components";
+import { Product, AddModal, Button, Select, Sidebar } from "@/components";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import router from "@/router";
@@ -47,6 +48,10 @@ const categoryOptions = [
   { value: "mug", label: "Canecas" },
   { value: "ecobag", label: "Ecobags" },
 ];
+const filters = ref({
+  name: "",
+  price: 200,
+});
 
 const selectedCategory = computed({
   get: () => route.params.category || "all",
@@ -75,6 +80,23 @@ const fetchProducts = async (category) => {
     console.error("Error fetching products:", error);
   }
 };
+
+const handleFilter = ({ name, price }) => {
+  filters.value.name = name;
+  filters.value.price = price;
+};
+
+const filteredProducts = computed(() => {
+  return products.value.filter((product) => {
+    const matchesName = product.title
+      .toLowerCase()
+      .includes(filters.value.name.toLowerCase());
+
+    const matchesPrice = product.price <= filters.value.price;
+
+    return matchesName && matchesPrice;
+  });
+});
 
 watchEffect(() => {
   fetchProducts(route.params.category);
