@@ -23,7 +23,7 @@
         class="range"
       />
     </div>
-    <Button class="send" button-text="Enviar" @click="handleFilter" />
+    <Button class="send" button-text="Filtrar" @click="handleFilter" />
   </div>
 </template>
 
