@@ -1,82 +1,25 @@
 {
   "products": [
     {
-      "title": "Produto 1",
-      "description": "Descrição do produto 1",
-      "price": 19.99,
-      "id": "KlfGkjTu394"
-    },
-    {
-      "title": "Produto 2",
-      "description": "Descrição do produto 2",
-      "price": 29.99,
-      "id": "2HQbQoUI_MI"
-    },
-    {
-      "title": "Produto 3",
-      "description": "Descrição do produto 3",
+      "title": "Camiseta 1",
+      "description": "Descrição da camiseta 1",
       "price": 25.99,
-      "id": "pGmeLVx2dqE"
+      "category": "tshirt",
+      "id": "h_bvxLriQAM"
     },
     {
-      "title": "Produto 4",
-      "description": "Descrição do produto 4",
-      "price": 32.99,
-      "id": "0pNolW--Gg4"
+      "title": "Caneca 1 ",
+      "description": "Descrição da caneca 1",
+      "price": 12.99,
+      "category": "mug",
+      "id": "hPzpHoLtmb4"
     },
     {
-      "title": "Produto 5",
-      "description": "Descrição do produto 5",
-      "price": 39.99,
-      "id": "OxEhRkzLBj8"
-    },
-    {
-      "title": "Produto 6",
-      "description": "Descrição do produto 6",
-      "price": 45.99,
-      "id": "upLHoZrkpVw"
-    },
-    {
-      "title": "Produto 7",
-      "description": "Descrição do produto 7",
+      "title": "Ecobag 1",
+      "description": "Descrição da ecobag 1",
       "price": 18.99,
-      "id": "HQv-yO9MSMc"
-    },
-    {
-      "title": "Produto 8",
-      "description": "Descrição do produto 8",
-      "price": 39.99,
-      "id": "YcTrZuCmjxY"
-    },
-    {
-      "title": "Produto 9",
-      "description": "Descrição do produto 9 ",
-      "price": 50.99,
-      "id": "WZMplgIIKsY"
-    },
-    {
-      "title": "Produto 10",
-      "description": "Descrição do produto 10",
-      "price": 76.99,
-      "id": "n1jtIaDelBI"
-    },
-    {
-      "title": "Produto 11",
-      "description": "Descrição do produto 11",
-      "price": 60.99,
-      "id": "Ta8sFS7a8io"
-    },
-    {
-      "title": "Produto 12",
-      "description": "Descrição do produto 12",
-      "price": 23.99,
-      "id": "K9ApVO9pYKY"
-    },
-    {
-      "title": "Produto 13",
-      "description": "Descrição do produto 13",
-      "price": 39.99,
-      "id": "M6lYkhBIN0g"
+      "category": "ecobag",
+      "id": "7tSWHVfJQTM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

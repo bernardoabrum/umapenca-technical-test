@@ -71,13 +71,13 @@ const selectedCategory = ref("");
 
 const categoryOptions = [
   { value: "", label: "Selecione a categoria", disabled: true },
-  { value: "tshirt", label: "Camisetas" },
-  { value: "mug", label: "Canecas" },
-  { value: "ecobag", label: "Ecobags" },
+  { value: "tshirt", label: "Camiseta" },
+  { value: "mug", label: "Caneca" },
+  { value: "ecobag", label: "Ecobag" },
 ];
 
 const handleSubmit = async () => {
-  if (!name.value || !description.value || numberValue.value === null) {
+  if (!name.value || !description.value || numberValue.value === null || !selectedCategory.value) {
     alert("Por favor, preencha todos os campos.");
     return;
   }
@@ -86,6 +86,7 @@ const handleSubmit = async () => {
     title: name.value,
     description: description.value,
     price: numberValue.value,
+    category: selectedCategory.value,
   };
 
   try {
