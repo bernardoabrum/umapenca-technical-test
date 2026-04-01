@@ -9,7 +9,6 @@
 
 <script setup>
 import "./Button.less";
-import { ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 
