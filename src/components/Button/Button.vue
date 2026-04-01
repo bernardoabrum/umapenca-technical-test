@@ -15,7 +15,7 @@ import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 
 const emit = defineEmits(["click"]);
 
-const props = defineProps({
+defineProps({
   buttonText: {
     type: String,
     required: true,

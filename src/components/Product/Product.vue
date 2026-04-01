@@ -18,7 +18,7 @@
 <script setup>
 import "./Product.less";
 
-const props = defineProps({
+defineProps({
   imageSrc: {
     type: String,
     required: true,
