@@ -1,11 +1,6 @@
 <template>
   <div :class="['cmp-sidebar', { hide: !showSidebar }]">
     <h1 class="title">Filtros</h1>
-    <div class="close-button">
-      <button @click="showSidebar = !showSidebar">
-        <FontAwesomeIcon :icon="faBars" />
-      </button>
-    </div>
     <div class="input-search">
       <p>Buscar produto</p>
       <Input
@@ -35,13 +30,17 @@
 <script setup>
 import "./Sidebar.less";
 import { ref } from "vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Input, Button } from "@/components";
 
 const emit = defineEmits(["filter"]);
 
-const showSidebar = ref(true);
+defineProps({
+  showSidebar: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 const name = ref("");
 const price = ref(200);
 

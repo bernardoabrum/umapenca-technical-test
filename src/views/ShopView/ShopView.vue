@@ -1,6 +1,7 @@
 <template>
   <div class="view shop-view">
-    <Sidebar @filter="handleFilter" />
+    <Header @toggle-sidebar="handleToggleSidebar" />
+    <Sidebar @filter="handleFilter" :show-sidebar="showSidebar" />
     <Select
       select-name="category"
       :select-options="categoryOptions"
@@ -32,7 +33,14 @@
 <script setup>
 import "./ShopView.less";
 import { ref, computed, watchEffect } from "vue";
-import { Product, AddModal, Button, Select, Sidebar } from "@/components";
+import {
+  Product,
+  AddModal,
+  Button,
+  Select,
+  Sidebar,
+  Header,
+} from "@/components";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import router from "@/router";
@@ -42,6 +50,7 @@ const route = useRoute();
 
 const products = ref([]);
 const showAddModal = ref(false);
+const showSidebar = ref(false);
 const categoryOptions = [
   { value: "all", label: "Todos os produtos" },
   { value: "tshirt", label: "Camisetas" },
@@ -62,6 +71,18 @@ const selectedCategory = computed({
       router.push(`/shop/${value}`);
     }
   },
+});
+
+const filteredProducts = computed(() => {
+  return products.value.filter((product) => {
+    const matchesName = product.title
+      .toLowerCase()
+      .includes(filters.value.name.toLowerCase());
+
+    const matchesPrice = product.price <= filters.value.price;
+
+    return matchesName && matchesPrice;
+  });
 });
 
 const fetchProducts = async (category) => {
@@ -86,17 +107,9 @@ const handleFilter = ({ name, price }) => {
   filters.value.price = price;
 };
 
-const filteredProducts = computed(() => {
-  return products.value.filter((product) => {
-    const matchesName = product.title
-      .toLowerCase()
-      .includes(filters.value.name.toLowerCase());
-
-    const matchesPrice = product.price <= filters.value.price;
-
-    return matchesName && matchesPrice;
-  });
-});
+const handleToggleSidebar = () => {
+  showSidebar.value = !showSidebar.value;
+};
 
 watchEffect(() => {
   fetchProducts(route.params.category);
