@@ -8,18 +8,25 @@
       </div>
       <h1 class="title">Adicionar novo produto</h1>
       <div class="inputs">
-        <input
-          type="text"
+        <Input
+          input-name="title"
+          input-type="text"
           placeholder="Nome do produto"
           v-model="name"
           maxlength="30"
         />
         <textarea
+          name="description"
           placeholder="Descrição do produto"
           v-model="description"
           maxlength="120"
         />
-        <input ref="inputRef" placeholder="Preço do produto" />
+        <Input
+          input-name="price"
+          ref="inputRef"
+          placeholder="Preço do produto"
+          maxlength="20"
+        />
       </div>
       <Button
         button-text="Enviar"
@@ -37,7 +44,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCurrencyInput } from "vue-currency-input";
 import axios from "axios";
-import { Button } from "@/components";
+import { Button, Input } from "@/components";
 
 const emit = defineEmits([
   "close",
