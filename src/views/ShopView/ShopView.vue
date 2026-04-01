@@ -1,9 +1,15 @@
 <template>
   <div class="view shop-view">
-    <h1 class="view-title">Camisetas</h1>
-    <button class="add-product" @click="showAddModal = true">
-      Adicionar produtos
-    </button>
+    <Select
+      select-name="category"
+      :select-options="categoryOptions"
+      v-model="selectedCategory"
+    />
+    <Button
+      class="add-product"
+      button-text="Adicionar produtos"
+      @click="showAddModal = true"
+    />
     <div class="products-container">
       <Product
         v-for="product in products"
@@ -24,17 +30,37 @@
 
 <script setup>
 import "./ShopView.less";
-import { onMounted, ref } from "vue";
-import { Product, AddModal } from "@/components";
+import { onMounted, ref, watch } from "vue";
+import { Product, AddModal, Button, Select } from "@/components";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
+import router from "@/router";
 
 const products = ref([]);
 const showAddModal = ref(false);
+const selectedCategory = ref("all");
+
+const categoryOptions = [
+  { value: "all", label: "Todos os produtos" },
+  { value: "tshirt", label: "Camisetas" },
+  { value: "mug", label: "Canecas" },
+  { value: "ecobag", label: "Ecobags" },
+];
 
 onMounted(() => {
   fetchProducts();
 });
+
+watch(
+  () => selectedCategory.value,
+  (value) => {
+    if (value === "all") {
+      router.push("/shop");
+      return;
+    }
+    router.push(`/shop/${value}`);
+  },
+);
 
 const fetchProducts = async () => {
   try {

@@ -21,6 +21,11 @@
           v-model="description"
           maxlength="120"
         />
+        <Select
+          select-name="category"
+          :select-options="categoryOptions"
+          v-model="selectedCategory"
+        />
         <Input
           input-name="price"
           ref="inputRef"
@@ -44,7 +49,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCurrencyInput } from "vue-currency-input";
 import axios from "axios";
-import { Button, Input } from "@/components";
+import { Button, Input, Select } from "@/components";
 
 const emit = defineEmits([
   "close",
@@ -62,6 +67,14 @@ const { inputRef, numberValue, setValue } = useCurrencyInput({
   autoDecimalDigits: true,
 });
 const isLoading = ref(false);
+const selectedCategory = ref("");
+
+const categoryOptions = [
+  { value: "", label: "Selecione a categoria", disabled: true },
+  { value: "tshirt", label: "Camisetas" },
+  { value: "mug", label: "Canecas" },
+  { value: "ecobag", label: "Ecobags" },
+];
 
 const handleSubmit = async () => {
   if (!name.value || !description.value || numberValue.value === null) {
@@ -83,6 +96,7 @@ const handleSubmit = async () => {
     name.value = "";
     description.value = "";
     setValue(null);
+    selectedCategory.value = "";
 
     setTimeout(() => {
       emit("close");

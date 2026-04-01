@@ -1,33 +1,15 @@
-@import "@/styles/variables.less";
-
 .shop-view {
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 100vw;
 
-  .view-title {
-    font-size: 32px;
-  }
-
   .add-product {
     align-self: flex-end;
     margin: 20px 0;
-    padding: 20px 30px;
-    font-size: 20px;
-    background-color: @button-color;
-    color: white;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: ease 0.3s;
 
     @media (max-width: 768px) {
       align-self: center;
-    }
-
-    &:hover {
-      background-color: @button-hover;
     }
   }
 

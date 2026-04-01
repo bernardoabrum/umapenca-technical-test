@@ -9,7 +9,7 @@ const router = createRouter({
       redirect: "/shop",
     },
     {
-      path: "/shop",
+      path: "/shop/:category?",
       name: "shop",
       component: ShopView,
     },
