@@ -21,10 +21,11 @@
         />
         <input ref="inputRef" placeholder="Preço do produto" />
       </div>
-      <button class="button-send" @click="handleSubmit">
-        <FontAwesomeIcon :icon="faCircleNotch" v-if="isLoading" />
-        <span v-else>Enviar</span>
-      </button>
+      <Button
+        button-text="Enviar"
+        @click="handleSubmit"
+        :is-loading="isLoading"
+      />
     </div>
   </div>
 </template>
@@ -33,9 +34,10 @@
 import "./AddModal.less";
 import { ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faXmark, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCurrencyInput } from "vue-currency-input";
 import axios from "axios";
+import { Button } from "@/components";
 
 const emit = defineEmits([
   "close",
@@ -43,16 +45,16 @@ const emit = defineEmits([
   "update:modelValue",
   "change",
 ]);
-const isLoading = ref(false);
+
 const name = ref("");
 const description = ref("");
-
 const { inputRef, numberValue, setValue } = useCurrencyInput({
   locale: "pt-BR",
   currency: "BRL",
   precision: 2,
   autoDecimalDigits: true,
 });
+const isLoading = ref(false);
 
 const handleSubmit = async () => {
   if (!name.value || !description.value || numberValue.value === null) {
@@ -67,19 +69,17 @@ const handleSubmit = async () => {
   };
 
   try {
-    isLoading.value = true;
-
     await axios.post("http://localhost:3000/products", newProduct);
     emit("addProduct");
+    isLoading.value = true;
 
     name.value = "";
     description.value = "";
     setValue(null);
 
     setTimeout(() => {
-      isLoading.value = false;
       emit("close");
-    }, 500);
+    }, 1000);
   } catch (error) {
     console.error("Error adding product:", error);
   }
