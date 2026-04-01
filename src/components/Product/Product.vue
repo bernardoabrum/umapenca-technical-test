@@ -1,16 +1,16 @@
 <template>
   <div class="cmp-product">
     <div class="container-image">
-      <img :src="props.imageSrc" :alt="props.productName" />
+      <img :src="imageSrc" :alt="productName" />
     </div>
     <div class="container-text">
       <div class="infos">
-        <h1 class="title">{{ props.productName }}</h1>
+        <h1 class="title">{{ productName }}</h1>
         <h2 class="description">
-          {{ props.productDescription }}
+          {{ productDescription }}
         </h2>
       </div>
-      <p class="price">{{ formatPrice(props.productPrice) }}</p>
+      <p class="price">{{ formatPrice(productPrice) }}</p>
     </div>
   </div>
 </template>
