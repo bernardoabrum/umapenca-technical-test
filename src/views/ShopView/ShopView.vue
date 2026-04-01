@@ -30,16 +30,17 @@
 
 <script setup>
 import "./ShopView.less";
-import { onMounted, ref, watch } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { Product, AddModal, Button, Select } from "@/components";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import router from "@/router";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const products = ref([]);
 const showAddModal = ref(false);
-const selectedCategory = ref("all");
-
 const categoryOptions = [
   { value: "all", label: "Todos os produtos" },
   { value: "tshirt", label: "Camisetas" },
@@ -47,24 +48,24 @@ const categoryOptions = [
   { value: "ecobag", label: "Ecobags" },
 ];
 
-onMounted(() => {
-  fetchProducts();
-});
-
-watch(
-  () => selectedCategory.value,
-  (value) => {
+const selectedCategory = computed({
+  get: () => route.params.category || "all",
+  set: (value) => {
     if (value === "all") {
       router.push("/shop");
-      return;
+    } else {
+      router.push(`/shop/${value}`);
     }
-    router.push(`/shop/${value}`);
   },
-);
+});
 
-const fetchProducts = async () => {
+const fetchProducts = async (category) => {
   try {
-    const response = await axios.get("http://localhost:3000/products");
+    const response = await axios.get(
+      !category
+        ? "http://localhost:3000/products"
+        : `http://localhost:3000/products?category=${category}`,
+    );
 
     products.value = response.data.map((product) => ({
       ...product,
@@ -74,4 +75,8 @@ const fetchProducts = async () => {
     console.error("Error fetching products:", error);
   }
 };
+
+watchEffect(() => {
+  fetchProducts(route.params.category);
+});
 </script>
