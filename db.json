@@ -8,7 +8,7 @@
       "id": "h_bvxLriQAM"
     },
     {
-      "title": "Caneca 1 ",
+      "title": "Caneca 1",
       "description": "Descrição da caneca 1",
       "price": 12.99,
       "category": "mug",
@@ -20,6 +20,48 @@
       "price": 18.99,
       "category": "ecobag",
       "id": "7tSWHVfJQTM"
+    },
+    {
+      "title": "Camiseta 2",
+      "description": "Descrição da camiseta 2",
+      "price": 22.99,
+      "category": "tshirt",
+      "id": "WCVTbn2EmbU"
+    },
+    {
+      "title": "Ecobag 2",
+      "description": "Descrição da ecobag 2",
+      "price": 19.99,
+      "category": "ecobag",
+      "id": "hazEpj0R75w"
+    },
+    {
+      "title": "Caneca 2",
+      "description": "Descrição da caneca 2",
+      "price": 23.99,
+      "category": "mug",
+      "id": "1YUWLDhdsss"
+    },
+    {
+      "title": "Camiseta 3",
+      "description": "Descrição da camiseta 3",
+      "price": 33.99,
+      "category": "tshirt",
+      "id": "K1PWFMr8eE4"
+    },
+    {
+      "title": "Camiseta 4",
+      "description": "Descrição da camiseta 4",
+      "price": 41.99,
+      "category": "tshirt",
+      "id": "luRj6Y7MbUg"
+    },
+    {
+      "title": "Caneca 3",
+      "description": "Descrição da caneca 3",
+      "price": 22.99,
+      "category": "mug",
+      "id": "Q4bK3kFnA3w"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

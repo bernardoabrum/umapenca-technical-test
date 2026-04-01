@@ -77,14 +77,19 @@ const categoryOptions = [
 ];
 
 const handleSubmit = async () => {
-  if (!name.value || !description.value || numberValue.value === null || !selectedCategory.value) {
+  if (
+    !name.value ||
+    !description.value ||
+    numberValue.value === null ||
+    !selectedCategory.value
+  ) {
     alert("Por favor, preencha todos os campos.");
     return;
   }
 
   const newProduct = {
-    title: name.value,
-    description: description.value,
+    title: name.value.trim(),
+    description: description.value.trim(),
     price: numberValue.value,
     category: selectedCategory.value,
   };
