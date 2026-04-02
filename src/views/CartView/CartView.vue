@@ -33,17 +33,25 @@
         </div>
         <div class="delivery">
           <h2>Informações de entrega</h2>
-          <Input
-            input-name="cep"
-            placeholder="00000-000"
-            :required="true"
-            input-label="CEP"
-            input-mask="#####-###"
-            autocomplete="postal-code"
-            v-model="form.cep"
-            @blur="handleBlur('cep')"
-            :is-empty="emptyFields.cep"
-          />
+          <div class="cep-container">
+            <Input
+              input-name="cep"
+              placeholder="00000-000"
+              :required="true"
+              input-label="CEP"
+              input-mask="#####-###"
+              autocomplete="postal-code"
+              v-model="form.cep"
+              @blur="handleBlur('cep')"
+              :is-empty="emptyFields.cep"
+            />
+            <Button
+              @click="searchCEP"
+              button-type="button"
+              :is-loading="isSearchingCep"
+              ><FontAwesomeIcon :icon="faMagnifyingGlass"
+            /></Button>
+          </div>
           <Input
             input-name="street"
             placeholder="Nome da rua"
@@ -137,13 +145,14 @@
           />
         </div>
         <div class="finish-button">
-          <button type="submit">Concluir pedido</button>
+          <Button button-text="Concluir pedido" button-type="submit" />
         </div>
       </form>
     </div>
     <div class="container-right">
       <div class="bag-container">
         <h2>Sua sacola</h2>
+        <p v-if="bagEmpty">Você ainda não adicionou nenhum item!</p>
         <div class="product-container">
           <div class="product" v-for="item in items" :key="item.id">
             <div class="image">
@@ -173,7 +182,7 @@
             </div>
           </div>
         </div>
-        <p>Total: R$ {{ totalValue }}</p>
+        <p v-if="!bagEmpty">Total: R$ {{ totalValue }}</p>
       </div>
     </div>
   </div>
@@ -181,12 +190,17 @@
 
 <script setup>
 import "./CartView.less";
-import { Input } from "@/components";
+import { Input, Button } from "@/components";
 import { useStore } from "@/store";
-import { computed, reactive } from "vue";
+import { computed, reactive, ref } from "vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { states } from "@/utils/states";
+import cep from "cep-promise";
 
 const { getShoppingCart, setQuantity } = useStore();
 const items = computed(() => getShoppingCart());
+const isSearchingCep = ref(false);
 
 const form = reactive({
   email: "",
@@ -222,11 +236,38 @@ const totalValue = computed(() => {
   }, 0);
 });
 
+const bagEmpty = computed(() => {
+  return !getShoppingCart().length;
+});
+
 const submitForm = () => {
   console.log("Enviado");
 };
 
 const handleBlur = (field) => {
   emptyFields[field] = !form[field];
+};
+
+const searchCEP = async () => {
+  try {
+    if (!form.cep) return;
+
+    const cleanCep = form.cep.replace(/\D/g, "");
+    if (cleanCep.length !== 8) return;
+
+    isSearchingCep.value = true;
+
+    const data = await cep(cleanCep);
+
+    form.street = data.street;
+    form.city = data.city;
+    form.neighborhood = data.neighborhood;
+    form.state = states[data.state];
+  } catch (error) {
+    console.error("Error during search your postal code.");
+    emptyFields.cep = true;
+  } finally {
+    isSearchingCep.value = false;
+  }
 };
 </script>

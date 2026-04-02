@@ -1,8 +1,16 @@
 <template>
   <div class="cmp-button">
-    <button @click="hasClicked" :class="{ 'is-loading': isLoading }">
+    <button
+      :type="buttonType"
+      @click="$emit('click')"
+      :class="{ 'is-loading': isLoading }"
+    >
       <span class="icon"><FontAwesomeIcon :icon="faCircleNotch" /></span>
-      <span class="text">{{ buttonText }}</span>
+      <span class="text">
+        <slot>
+          {{ buttonText }}
+        </slot>
+      </span>
     </button>
   </div>
 </template>
@@ -17,15 +25,15 @@ const emit = defineEmits(["click"]);
 defineProps({
   buttonText: {
     type: String,
-    required: true,
+    required: false,
   },
   isLoading: {
     type: Boolean,
     default: false,
   },
+  buttonType: {
+    type: String,
+    required: false,
+  },
 });
-
-const hasClicked = () => {
-  emit("click");
-};
 </script>
