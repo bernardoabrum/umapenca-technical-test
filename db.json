@@ -62,6 +62,34 @@
       "price": 22.99,
       "category": "mug",
       "id": "Q4bK3kFnA3w"
+    },
+    {
+      "title": "Ecobag 3",
+      "description": "Descrição da ecobag 3",
+      "price": 28.99,
+      "category": "ecobag",
+      "id": "AujuRfsw5kE"
+    },
+    {
+      "title": "Caneca 4",
+      "description": "Descrição da caneca 4",
+      "price": 26.99,
+      "category": "mug",
+      "id": "eDhUt-PgtC4"
+    },
+    {
+      "title": "Ecobag 4",
+      "description": "Descrição da ecobag 4",
+      "price": 24.99,
+      "category": "ecobag",
+      "id": "hsPyoCVlXfg"
+    },
+    {
+      "title": "Camiseta 5",
+      "description": "Descrição da camiseta 5",
+      "price": 55.99,
+      "category": "tshirt",
+      "id": "tLlGZOijBEo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -12,7 +12,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   svg {
-    font-size: 16px;
+    font-size: 20px;
     color: #242424;
   }
 
@@ -29,5 +29,18 @@
     gap: 8px;
     cursor: pointer;
     background: none;
+    position: relative;
+
+    .items-number {
+      background-color: red;
+      color: white;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      font-size: 12px;
+      position: absolute;
+      right: -8px;
+      top: -10px;
+    }
   }
 }

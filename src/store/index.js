@@ -18,9 +18,11 @@ const store = createStore({
 
 export const useStore = () => {
   const addToCart = (item) => store.commit("setShoppingCart", item);
+  const getShoppingCart = () => store.state.shoppingCart;
 
   return {
     addToCart,
+    getShoppingCart,
   };
 };
 

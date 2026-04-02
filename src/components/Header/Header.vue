@@ -8,6 +8,7 @@
     <button class="cart-button" @click="router.push('/cart')">
       <span>Ir para o carrinho</span>
       <FontAwesomeIcon :icon="faCartArrowDown" />
+      <span v-if="itemsNumber" class="items-number">{{ itemsNumber }}</span>
     </button>
   </div>
 </template>
@@ -16,9 +17,17 @@
 import "./Header.less";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faBars, faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "@/store";
 
 const router = useRouter();
+
+const { getShoppingCart } = useStore();
+
+const itemsNumber = computed(() => {
+  return getShoppingCart().length;
+});
 
 const emit = defineEmits(["toggle-sidebar"]);
 </script>
