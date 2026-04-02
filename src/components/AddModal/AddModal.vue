@@ -49,6 +49,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCurrencyInput } from "vue-currency-input";
 import axios from "axios";
+import { faker } from "@faker-js/faker";
 import { Button, Input, Select } from "@/components";
 
 const emit = defineEmits([
@@ -92,6 +93,7 @@ const handleSubmit = async () => {
     description: description.value.trim(),
     price: numberValue.value,
     category: selectedCategory.value,
+    image: faker.image.url(),
   };
 
   try {

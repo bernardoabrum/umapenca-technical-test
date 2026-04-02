@@ -98,10 +98,7 @@ const fetchProducts = async (category) => {
         : `http://localhost:3000/products?category=${category}`,
     );
 
-    products.value = response.data.map((product) => ({
-      ...product,
-      image: faker.image.url(),
-    }));
+    products.value = response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
   }
