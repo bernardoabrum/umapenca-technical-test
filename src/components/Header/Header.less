@@ -1,4 +1,7 @@
 .cmp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   left: 0;
   top: 0;
@@ -7,16 +10,24 @@
   padding: 0 20px;
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
 
-  button {
-    background: none;
-    cursor: pointer;
+  svg {
+    font-size: 16px;
+    color: #242424;
+  }
 
-    svg {
-      font-size: 16px;
-      color: #242424;
+  .menu-button {
+    button {
+      background: none;
+      cursor: pointer;
     }
+  }
+
+  .cart-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: none;
   }
 }
