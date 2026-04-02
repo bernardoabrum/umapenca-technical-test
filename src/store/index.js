@@ -19,6 +19,23 @@ const store = createStore({
         });
       }
     },
+    setQuantity(state, { id, action }) {
+      const item = state.shoppingCart.find((product) => product.id === id);
+
+      if (action === "increase") {
+        item.quantity += 1;
+      }
+
+      if (action === "decrease") {
+        item.quantity -= 1;
+
+        if (item.quantity <= 0) {
+          state.shoppingCart = state.shoppingCart.filter(
+            (product) => product.id !== id,
+          );
+        }
+      }
+    },
   },
   getters: {
     getShoppingCart(state) {
@@ -30,10 +47,12 @@ const store = createStore({
 export const useStore = () => {
   const addToCart = (item) => store.commit("setShoppingCart", item);
   const getShoppingCart = () => store.state.shoppingCart;
+  const setQuantity = (payload) => store.commit("setQuantity", payload);
 
   return {
     addToCart,
     getShoppingCart,
+    setQuantity,
   };
 };
 
