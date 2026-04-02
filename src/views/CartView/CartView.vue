@@ -1,11 +1,15 @@
 <template>
   <div class="view cart-view">
     <div class="container-left">
-      <button>Continuar comprando</button>
-      <h1>Finalização do pedido</h1>
-      <form @submit.prevent="submitForm">
+      <div class="back-button">
+        <Button @click="router.push('/shop')">
+          <FontAwesomeIcon :icon="faArrowLeft" /> Continuar comprando
+        </Button>
+      </div>
+      <h1 class="title">Finalização do pedido</h1>
+      <form class="order-forms" @submit.prevent="submitForm">
         <div class="contact">
-          <h2>Informações de contato</h2>
+          <h2 class="subtitle">Informações de contato</h2>
           <Input
             input-type="email"
             input-name="email"
@@ -32,7 +36,7 @@
           />
         </div>
         <div class="delivery">
-          <h2>Informações de entrega</h2>
+          <h2 class="subtitle">Informações de entrega</h2>
           <div class="cep-container">
             <Input
               input-name="cep"
@@ -54,7 +58,7 @@
           </div>
           <Input
             input-name="street"
-            placeholder="Nome da rua"
+            placeholder="Rua"
             :required="true"
             input-label="Rua"
             maxlength="60"
@@ -98,7 +102,7 @@
           />
         </div>
         <div class="payment">
-          <h2>Informações de pagamento</h2>
+          <h2 class="subtitle">Informações de pagamento</h2>
           <Input
             input-name="cardNumber"
             placeholder="0000 0000 0000 0000"
@@ -194,9 +198,13 @@ import { Input, Button } from "@/components";
 import { useStore } from "@/store";
 import { computed, reactive, ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { states } from "@/utils/states";
 import cep from "cep-promise";
+import router from "@/router";
 
 const { getShoppingCart, setQuantity } = useStore();
 const items = computed(() => getShoppingCart());
@@ -249,6 +257,8 @@ const handleBlur = (field) => {
 };
 
 const searchCEP = async () => {
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   try {
     if (!form.cep) return;
 
@@ -256,6 +266,8 @@ const searchCEP = async () => {
     if (cleanCep.length !== 8) return;
 
     isSearchingCep.value = true;
+
+    await delay(500);
 
     const data = await cep(cleanCep);
 
