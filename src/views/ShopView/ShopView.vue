@@ -20,6 +20,8 @@
         :productName="product.title"
         :productDescription="product.description"
         :productPrice="product.price"
+        @buy-this-item="addItemToCart(product)"
+        :button-loading="buttonLoading === product.id"
       />
     </div>
     <AddModal
@@ -45,12 +47,15 @@ import axios from "axios";
 import { faker } from "@faker-js/faker";
 import router from "@/router";
 import { useRoute } from "vue-router";
+import { useStore } from "@/store";
 
 const route = useRoute();
+const { addToCart } = useStore();
 
 const products = ref([]);
 const showAddModal = ref(false);
 const showSidebar = ref(false);
+const buttonLoading = ref(false);
 const categoryOptions = [
   { value: "all", label: "Todos os produtos" },
   { value: "tshirt", label: "Camisetas" },
@@ -109,6 +114,15 @@ const handleFilter = ({ name, price }) => {
 
 const handleToggleSidebar = () => {
   showSidebar.value = !showSidebar.value;
+};
+
+const addItemToCart = (product) => {
+  addToCart(product);
+  buttonLoading.value = product.id;
+  setTimeout(() => {
+    buttonLoading.value = false;
+    alert("Produto adicionado ao carrinho!");
+  }, 500);
 };
 
 watchEffect(() => {

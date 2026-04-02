@@ -10,13 +10,23 @@
           {{ productDescription }}
         </h2>
       </div>
-      <p class="price">{{ formatPrice(productPrice) }}</p>
+      <div class="container-buy">
+        <p class="price">{{ formatPrice(productPrice) }}</p>
+        <Button
+          @click="emit('buy-this-item')"
+          button-text="Comprar"
+          :is-loading="buttonLoading"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import "./Product.less";
+import { Button } from "@/components";
+
+const emit = defineEmits(["buy-this-item"]);
 
 defineProps({
   imageSrc: {
@@ -34,6 +44,10 @@ defineProps({
   productPrice: {
     type: Number,
     required: true,
+  },
+  buttonLoading: {
+    type: Boolean,
+    default: false,
   },
 });
 
