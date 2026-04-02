@@ -1,8 +1,8 @@
 <template>
   <div class="cmp-button">
-    <button @click="hasClicked">
-      <span v-if="isLoading"><FontAwesomeIcon :icon="faCircleNotch" /></span>
-      <span v-else>{{ buttonText }}</span>
+    <button @click="hasClicked" :class="{ 'is-loading': isLoading }">
+      <span class="icon"><FontAwesomeIcon :icon="faCircleNotch" /></span>
+      <span class="text">{{ buttonText }}</span>
     </button>
   </div>
 </template>
