@@ -6,7 +6,18 @@ const store = createStore({
   },
   mutations: {
     setShoppingCart(state, item) {
-      state.shoppingCart.push(item);
+      const existingItem = state.shoppingCart.find(
+        (product) => product.id === item.id,
+      );
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.shoppingCart.push({
+          ...item,
+          quantity: 1,
+        });
+      }
     },
   },
   getters: {

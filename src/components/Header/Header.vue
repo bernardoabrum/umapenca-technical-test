@@ -26,7 +26,9 @@ const router = useRouter();
 const { getShoppingCart } = useStore();
 
 const itemsNumber = computed(() => {
-  return getShoppingCart().length;
+  return getShoppingCart().reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
 });
 
 const emit = defineEmits(["toggle-sidebar"]);
