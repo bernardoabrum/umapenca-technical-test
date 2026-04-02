@@ -1,4 +1,22 @@
 .cmp-input {
+  display: flex;
+  flex-direction: column;
+
+  &.invalid {
+    input {
+      border-color: red;
+    }
+
+    .error-message {
+      visibility: visible;
+    }
+  }
+
+  label {
+    margin-bottom: 2px;
+    font-size: 16px;
+  }
+
   input {
     width: 100%;
     padding: 10px;
@@ -11,5 +29,12 @@
     &::placeholder {
       color: #999;
     }
+  }
+
+  .error-message {
+    font-size: 12px;
+    color: red;
+    margin-top: 2px;
+    visibility: hidden;
   }
 }
