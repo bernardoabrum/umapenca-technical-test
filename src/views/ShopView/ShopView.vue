@@ -27,7 +27,7 @@
     <AddModal
       v-if="showAddModal"
       @close="showAddModal = false"
-      @add-product="fetchProducts"
+      @add-product="fetchProducts(route.params.category)"
     />
   </div>
 </template>
