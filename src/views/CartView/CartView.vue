@@ -7,7 +7,7 @@
         </Button>
       </div>
       <h1 class="title">Finalização do pedido</h1>
-      <form class="order-forms" @submit.prevent="submitForm">
+      <form class="order-forms" @submit.prevent="completeOrder">
         <div class="contact">
           <h2 class="subtitle">Informações de contato</h2>
           <Input
@@ -149,7 +149,11 @@
           />
         </div>
         <div class="finish-button">
-          <Button button-text="Concluir pedido" button-type="submit" />
+          <Button
+            button-text="Concluir pedido"
+            button-type="submit"
+            :is-loading="isSendingForm"
+          />
         </div>
       </form>
     </div>
@@ -191,14 +195,15 @@
         Total: R$ {{ !bagEmpty ? totalValue.toFixed(2) : "00,00" }}
       </p>
     </div>
+    <ModalSucess v-if="showSucessModal" @close="newOrder" />
   </div>
 </template>
 
 <script setup>
 import "./CartView.less";
-import { Input, Button } from "@/components";
+import { Input, Button, ModalSucess } from "@/components";
 import { useStore } from "@/store";
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, ref, onMounted, watch } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
   faMagnifyingGlass,
@@ -213,6 +218,8 @@ import router from "@/router";
 const { getShoppingCart, setQuantity } = useStore();
 const items = computed(() => getShoppingCart());
 const isSearchingCep = ref(false);
+const isSendingForm = ref(false);
+const showSucessModal = ref(false);
 
 const form = reactive({
   email: "",
@@ -242,6 +249,13 @@ const emptyFields = reactive({
   cardCVC: false,
 });
 
+onMounted(() => {
+  const savedForm = localStorage.getItem("checkoutForm");
+  if (savedForm) {
+    Object.assign(form, JSON.parse(savedForm));
+  }
+});
+
 const totalValue = computed(() => {
   return items.value.reduce((total, item) => {
     return total + item.price * item.quantity;
@@ -252,12 +266,36 @@ const bagEmpty = computed(() => {
   return !getShoppingCart().length;
 });
 
-const submitForm = () => {
-  console.log("Enviado");
+watch(
+  form,
+  (newVal) => {
+    localStorage.setItem("checkoutForm", JSON.stringify(newVal));
+  },
+  { deep: true },
+);
+
+const completeOrder = () => {
+  if (bagEmpty.value) {
+    alert("Você não adicionou nenhum item ao carrinho.");
+    return;
+  }
+
+  isSendingForm.value = true;
+  setTimeout(() => {
+    showSucessModal.value = true;
+    console.log("Pedido feito!");
+    isSendingForm.value = false;
+    localStorage.removeItem("checkoutForm");
+    localStorage.removeItem("shoppingCart");
+  }, 1000);
 };
 
 const handleBlur = (field) => {
   emptyFields[field] = !form[field];
+};
+
+const newOrder = () => {
+  window.location.reload();
 };
 
 const searchCEP = async () => {
@@ -280,7 +318,7 @@ const searchCEP = async () => {
     form.neighborhood = data.neighborhood;
     form.state = states[data.state];
   } catch (error) {
-    console.error("Error during search your postal code.");
+    console.error("Error searching postal code: ", error);
     emptyFields.cep = true;
   } finally {
     isSearchingCep.value = false;
