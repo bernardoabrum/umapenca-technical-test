@@ -1,5 +1,19 @@
 import { createStore } from "vuex";
 
+const localStoragePlugin = (store) => {
+  const cartFromStorage = localStorage.getItem("shoppingCart");
+  if (cartFromStorage) {
+    store.replaceState({
+      ...store.state,
+      shoppingCart: JSON.parse(cartFromStorage),
+    });
+  }
+
+  store.subscribe((mutation, state) => {
+    localStorage.setItem("shoppingCart", JSON.stringify(state.shoppingCart));
+  });
+};
+
 const store = createStore({
   state: {
     shoppingCart: [],
@@ -42,6 +56,7 @@ const store = createStore({
       return state.shoppingCart;
     },
   },
+  plugins: [localStoragePlugin],
 });
 
 export const useStore = () => {
