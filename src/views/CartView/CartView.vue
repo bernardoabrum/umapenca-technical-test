@@ -266,6 +266,33 @@ const bagEmpty = computed(() => {
   return !getShoppingCart().length;
 });
 
+const finalOrder = computed(() => {
+  const user = "Destinatário: " + form.cardHolder;
+  const email = "Email: " + form.email;
+  const phone = "Telefone: " + form.phone;
+  const address =
+    "Endereço: " +
+    form.street +
+    ", " +
+    form.neighborhood +
+    ", " +
+    form.city +
+    ", " +
+    form.state;
+  const order = getShoppingCart()
+    .map(
+      (item) =>
+        item.title +
+        " - R$ " +
+        item.price.toFixed(2) +
+        " - Quantidade: " +
+        item.quantity,
+    )
+    .join("\n");
+  const total = "Total: R$ " + totalValue.value.toFixed(2);
+  return [user, email, phone, address, "Itens:", order, total].join("\n\n");
+});
+
 watch(
   form,
   (newVal) => {
@@ -283,7 +310,7 @@ const completeOrder = () => {
   isSendingForm.value = true;
   setTimeout(() => {
     showSucessModal.value = true;
-    console.log("Pedido feito!");
+    console.log(finalOrder.value);
     isSendingForm.value = false;
     localStorage.removeItem("checkoutForm");
     localStorage.removeItem("shoppingCart");
