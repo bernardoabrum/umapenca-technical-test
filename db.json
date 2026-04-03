@@ -47,6 +47,54 @@
       "category": "ecobag",
       "image": "https://picsum.photos/seed/LRu9eh/1929/3226",
       "id": "zpzXV1l2BZU"
+    },
+    {
+      "title": "Camiseta 3",
+      "description": "Descrição da camiseta 3",
+      "price": 42.99,
+      "category": "tshirt",
+      "image": "https://picsum.photos/seed/6mNbG/1503/2606",
+      "id": "rTKo6J_pwoI"
+    },
+    {
+      "title": "Ecobag 3",
+      "description": "Descrição da ecobag 3",
+      "price": 14.99,
+      "category": "ecobag",
+      "image": "https://picsum.photos/seed/PqA2cCbmL/3766/2343",
+      "id": "dsQz_8C_3Ho"
+    },
+    {
+      "title": "Caneca 3",
+      "description": "Descrição da caneca 3",
+      "price": 42.99,
+      "category": "mug",
+      "image": "https://picsum.photos/seed/vI9hRg/1110/1451",
+      "id": "-IL_qGXlXNQ"
+    },
+    {
+      "title": "Camiseta 4",
+      "description": "Descrição da camiseta 4",
+      "price": 18.99,
+      "category": "tshirt",
+      "image": "https://picsum.photos/seed/i8rQ3Ac4W/2233/1859",
+      "id": "ku-bbg4yeA0"
+    },
+    {
+      "title": "Caneca 4",
+      "description": "Descrição da caneca 4",
+      "price": 54.99,
+      "category": "mug",
+      "image": "https://picsum.photos/seed/GVxS2Xw/772/1868",
+      "id": "owKLTIPjJUU"
+    },
+    {
+      "title": "Ecobag 4",
+      "description": "Descrição da ecobag 4",
+      "price": 28.99,
+      "category": "ecobag",
+      "image": "https://picsum.photos/seed/jehTv9/2871/844",
+      "id": "lIEXqtZ8q_A"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
