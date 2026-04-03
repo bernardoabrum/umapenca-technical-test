@@ -169,7 +169,7 @@
             <div class="description">
               <div>
                 <p class="title">{{ item.title }}</p>
-                <p class="price">R$ {{ item.price }}</p>
+                <p class="price">{{ formatPrice(item.price) }}</p>
               </div>
               <div class="quantity">
                 <p class="title">Quantidade</p>
@@ -192,7 +192,7 @@
         </div>
       </div>
       <p class="total">
-        Total: R$ {{ !bagEmpty ? totalValue.toFixed(2) : "00,00" }}
+        Total: {{ !bagEmpty ? formatPrice(totalValue) : "R$ 0,00" }}
       </p>
     </div>
     <ModalSucess v-if="showSucessModal" @close="newOrder" />
@@ -350,5 +350,12 @@ const searchCEP = async () => {
   } finally {
     isSearchingCep.value = false;
   }
+};
+
+const formatPrice = (value) => {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
 };
 </script>
