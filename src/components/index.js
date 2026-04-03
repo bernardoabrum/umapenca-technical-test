@@ -5,5 +5,15 @@ import Input from "./Input/Input.vue";
 import Select from "./Select/Select.vue";
 import Sidebar from "./Sidebar/Sidebar.vue";
 import Header from "./Header/Header.vue";
+import ModalSucess from "./ModalSucess/ModalSucess.vue";
 
-export { Product, AddModal, Button, Input, Select, Sidebar, Header };
+export {
+  Product,
+  AddModal,
+  Button,
+  Input,
+  Select,
+  Sidebar,
+  Header,
+  ModalSucess,
+};
