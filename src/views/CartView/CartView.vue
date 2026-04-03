@@ -154,8 +154,8 @@
       </form>
     </div>
     <div class="container-right">
+      <h2 class="bag-title">Sua sacola</h2>
       <div class="bag-container">
-        <h2>Sua sacola</h2>
         <p v-if="bagEmpty">Você ainda não adicionou nenhum item!</p>
         <div class="product-container">
           <div class="product" v-for="item in items" :key="item.id">
@@ -164,30 +164,32 @@
             </div>
             <div class="description">
               <div>
-                <p>{{ item.title }}</p>
-                <p>R$ {{ item.price }}</p>
+                <p class="title">{{ item.title }}</p>
+                <p class="price">R$ {{ item.price }}</p>
               </div>
               <div class="quantity">
-                <p>Quantidade</p>
+                <p class="title">Quantidade</p>
                 <div class="setter">
                   <button
                     @click="setQuantity({ id: item.id, action: 'decrease' })"
                   >
-                    -
+                    <FontAwesomeIcon :icon="faMinus" />
                   </button>
-                  <p>{{ item.quantity }}</p>
+                  <p class="number">{{ item.quantity }}</p>
                   <button
                     @click="setQuantity({ id: item.id, action: 'increase' })"
                   >
-                    +
+                    <FontAwesomeIcon :icon="faPlus" />
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <p v-if="!bagEmpty">Total: R$ {{ totalValue }}</p>
       </div>
+      <p class="total">
+        Total: R$ {{ !bagEmpty ? totalValue.toFixed(2) : "00,00" }}
+      </p>
     </div>
   </div>
 </template>
@@ -201,6 +203,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
   faMagnifyingGlass,
   faArrowLeft,
+  faPlus,
+  faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 import { states } from "@/utils/states";
 import cep from "cep-promise";
