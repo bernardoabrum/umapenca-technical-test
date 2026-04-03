@@ -21,6 +21,8 @@
             v-model="form.email"
             @blur="handleBlur('email')"
             :is-empty="emptyFields.email"
+            @validate="validateField('email', $event)"
+            :is-valid="validFields.email"
           />
           <Input
             input-type="tel"
@@ -33,6 +35,8 @@
             v-model="form.phone"
             @blur="handleBlur('phone')"
             :is-empty="emptyFields.phone"
+            @validate="validateField('phone', $event)"
+            :is-valid="validFields.phone"
           />
         </div>
         <div class="delivery">
@@ -48,6 +52,8 @@
               v-model="form.cep"
               @blur="handleBlur('cep')"
               :is-empty="emptyFields.cep"
+              @validate="validateField('cep', $event)"
+              :is-valid="validFields.cep"
             />
             <Button
               @click="searchCEP"
@@ -66,6 +72,8 @@
             v-model="form.street"
             @blur="handleBlur('street')"
             :is-empty="emptyFields.street"
+            @validate="validateField('street', $event)"
+            :is-valid="validFields.street"
           />
           <Input
             input-name="city"
@@ -77,6 +85,8 @@
             v-model="form.city"
             @blur="handleBlur('city')"
             :is-empty="emptyFields.city"
+            @validate="validateField('city', $event)"
+            :is-valid="validFields.city"
           />
           <Input
             input-name="neighborhood"
@@ -88,6 +98,8 @@
             v-model="form.neighborhood"
             @blur="handleBlur('neighborhood')"
             :is-empty="emptyFields.neighborhood"
+            @validate="validateField('neighborhood', $event)"
+            :is-valid="validFields.neighborhood"
           />
           <Input
             input-name="state"
@@ -99,6 +111,8 @@
             v-model="form.state"
             @blur="handleBlur('state')"
             :is-empty="emptyFields.state"
+            @validate="validateField('state', $event)"
+            :is-valid="validFields.state"
           />
         </div>
         <div class="payment">
@@ -113,6 +127,8 @@
             v-model="form.cardNumber"
             @blur="handleBlur('cardNumber')"
             :is-empty="emptyFields.cardNumber"
+            @validate="validateField('cardNumber', $event)"
+            :is-valid="validFields.cardNumber"
           />
           <Input
             input-name="cardHolder"
@@ -124,6 +140,8 @@
             v-model="form.cardHolder"
             @blur="handleBlur('cardHolder')"
             :is-empty="emptyFields.cardHolder"
+            @validate="validateField('cardHolder', $event)"
+            :is-valid="validFields.cardHolder"
           />
           <Input
             input-name="cardExpiration"
@@ -135,6 +153,8 @@
             v-model="form.cardExpiration"
             @blur="handleBlur('cardExpiration')"
             :is-empty="emptyFields.cardExpiration"
+            @validate="validateField('cardExpiration', $event)"
+            :is-valid="validFields.cardExpiration"
           />
           <Input
             input-name="cardCVC"
@@ -146,6 +166,8 @@
             v-model="form.cardCVC"
             @blur="handleBlur('cardCVC')"
             :is-empty="emptyFields.cardCVC"
+            @validate="validateField('cardCVC', $event)"
+            :is-valid="validFields.cardCVC"
           />
         </div>
         <div class="finish-button">
@@ -249,10 +271,28 @@ const emptyFields = reactive({
   cardCVC: false,
 });
 
+const validFields = reactive({
+  email: null,
+  phone: null,
+  cep: null,
+  street: null,
+  city: null,
+  neighborhood: null,
+  state: null,
+  cardNumber: null,
+  cardHolder: null,
+  cardExpiration: null,
+  cardCVC: null,
+});
+
 onMounted(() => {
   const savedForm = localStorage.getItem("checkoutForm");
   if (savedForm) {
     Object.assign(form, JSON.parse(savedForm));
+
+    Object.keys(form).forEach((field) => {
+      validateField(field, !!form[field]);
+    });
   }
 });
 
@@ -307,6 +347,15 @@ const completeOrder = () => {
     return;
   }
 
+  const allFieldsValid = Object.values(validFields).every(
+    (field) => field === true,
+  );
+
+  if (!allFieldsValid) {
+    alert("Preencha corretamente todos os campos.");
+    return;
+  }
+
   isSendingForm.value = true;
   setTimeout(() => {
     showSucessModal.value = true;
@@ -350,6 +399,10 @@ const searchCEP = async () => {
   } finally {
     isSearchingCep.value = false;
   }
+};
+
+const validateField = (field, value) => {
+  validFields[field] = value;
 };
 
 const formatPrice = (value) => {

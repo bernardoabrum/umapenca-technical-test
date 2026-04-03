@@ -1,5 +1,5 @@
 <template>
-  <div :class="['cmp-input', { invalid: isEmpty }]">
+  <div :class="['cmp-input', { invalid: isEmpty }, { isValid }]">
     <label :for="inputName">{{ inputLabel }}</label>
     <input
       :id="inputName"
@@ -12,7 +12,8 @@
       v-maska="inputMask"
       :required="required"
       :autocomplete="autocomplete"
-      @blur="$emit('blur', $event.target.value)"
+      @blur="handleBlur"
+      @maska="handleMask"
     />
     <p class="error-message">Este campo não pode ser vazio!</p>
   </div>
@@ -21,10 +22,12 @@
 <script setup>
 import "./Input.less";
 import { vMaska } from "maska/vue";
+import { ref } from "vue";
 
-const emit = defineEmits(["update:modelValue", "blur"]);
+const emit = defineEmits(["update:modelValue", "blur", "validate"]);
+const maskCompleted = ref(false);
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: String,
     default: "",
@@ -66,5 +69,28 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  isValid: {
+    type: Boolean,
+    default: null,
+  },
 });
+
+const handleMask = (e) => {
+  maskCompleted.value = e.detail.completed;
+};
+
+const handleBlur = (e) => {
+  const value = e.target.value;
+
+  let valid;
+
+  if (props.inputMask) {
+    valid = maskCompleted.value;
+  } else {
+    valid = value.trim().length > 0;
+  }
+
+  emit("validate", valid);
+  emit("blur", value);
+};
 </script>
