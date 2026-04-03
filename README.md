@@ -1,4 +1,4 @@
-# umapenca-technical-test
+# Uma Penca - Technical test
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -19,20 +19,28 @@ This template should help get you started developing with Vue 3 in Vite.
 
 See [Vite Configuration Reference](https://vite.dev/config/).
 
+## Node version
+
+The project must haves Node version 20.19 or higher.
+
 ## Project Setup
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Start the local instance and database on the correct port with concurrently
 
 ```sh
-npm run dev
+npm start
 ```
 
-### Compile and Minify for Production
+### Or start manually each
 
 ```sh
-npm run build
+npm run server
+```
+
+```sh
+npm npx json-server --watch db.json --port 3000
 ```
