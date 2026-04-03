@@ -23,6 +23,12 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 The project must haves Node version 20.19 or higher.
 
+## Clone repository
+
+```sh
+git clone https://github.com/bernardoabrum/umapenca-technical-test.git
+```
+
 ## Project Setup
 
 ```sh
